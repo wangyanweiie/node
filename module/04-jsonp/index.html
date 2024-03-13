@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- jsonp 接口调用 -->
+  <script>
+    /**
+     * @param {string} url
+     * @param {function} callback
+     * 1. 通过 script 标签加载资源
+     * 2. 通过 window[callback] = function(data) {} 来实现回调
+     * 3. 通过 document.body.removeChild(script) 来移除 script 标签
+     */
+    function getJSONP(url, callback) {
+      var script = document.createElement('script');
+      script.src = url;
+      document.body.appendChild(script);
+
+      if(callback) {
+        window[callback] = function(data) {
+          document.body.removeChild(script);
+          callback(data);
+        }
+      }
+      
+    }
+    
+    getJSONP('http://localhost:3000/api?callback=wyw');
+
+    /**
+     * 回调函数
+     */
+    function wyw(obj) {
+      console.log(obj)
+    }
+  </script>
+</body>
+</html>
