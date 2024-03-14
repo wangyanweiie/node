@@ -15,7 +15,12 @@ const server = http.createServer();
 server.on("request", (request, response) => {
   const urlobj = url.parse(request.url, true);
   const pathname = urlobj.pathname; // 路径
-  const query = urlobj.query; // 参数
+
+  response.writeHead(200, {
+    "Content-Type": "application/json;charset=utf-8",
+    // 允许跨域
+    "access-control-allow-origin": "*",
+  });
 
   switch (pathname) {
     case "/api":
@@ -28,7 +33,6 @@ server.on("request", (request, response) => {
         time: new Date(),
       });
 
-      // 返回 jsonp
       response.end(`${content}`);
       break;
 

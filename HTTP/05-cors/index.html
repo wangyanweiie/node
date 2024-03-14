@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>跨域</title>
+</head>
+<body>
+  <script>
+    /**
+     * Live Server 运行时，存在跨域问题，若后端未设置允许跨域，直接请求数据报错；
+     * Access to fetch at 'http://localhost:3000/api' from origin 'http://127.0.0.1:5500' has been blocked by CORS policy: 
+     * No 'Access-Control-Allow-Origin' header is present on the requested resource. 
+     * If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.
+     */
+    fetch('http://localhost:3000/api')
+      // 请求头 & readStream 流
+      .then(response => response.json()) 
+      // 真实数据
+      .then(data => console.log(data))
+      .catch(error => console.error(error))
+  </script>
+</body>
+</html>
