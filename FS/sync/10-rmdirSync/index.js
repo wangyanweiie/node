@@ -2,8 +2,8 @@ const fs = require("fs");
 
 /**
  * 读取目录
- * @params path 目录路径
- * @params callback 回调函数 => error-first
+ * @param {string} 目录路径
+ * @param {function} 回调函数 => error-first
  */
 fs.readdir("./test", (err, res) => {
   if (err) {
@@ -15,15 +15,19 @@ fs.readdir("./test", (err, res) => {
         console.log(err);
     }
   } else {
-    res.forEach((item) => {
-      // 同步方法
-      try {
-        fs.unlinkSync(`./test/${item}`);
-      } catch (error) {
-        console.log(error);
-      }
-    });
+    // 删除文件
+    if (res.length > 0) {
+      res.forEach((item) => {
+        // 同步方法
+        try {
+          fs.unlinkSync(`./test/${item}`);
+        } catch (error) {
+          console.log(error);
+        }
+      });
+    }
 
+    // 删除目录
     fs.rmdir("./test", (err) => {
       if (err) {
         console.log(err);
