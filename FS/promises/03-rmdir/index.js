@@ -5,24 +5,16 @@ const fs = require("fs").promises;
  * @param {string} 目录路径
  */
 fs.readdir("./test")
-  .then((res) => {
-    if (res.length > 0) {
-      // 删除文件
-      res.forEach((item) => {
-        fs.unlink(`./test/${item}`)
-          .then(() => {
-            console.log(`删除[${item}]文件成功`);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      });
+  .then(async (res) => {
+    // 删除文件
+    const arr = res.map((item) => fs.unlink(`./test/${item}`));
+
+    if (arr.length > 0) {
+      await Promise.all(arr);
     }
 
     // 删除目录
-    fs.rmdir("./test").then(() => {
-      console.log("目录删除成功");
-    });
+    await fs.rmdir("./test");
   })
   .catch((err) => {
     switch (err.code) {
