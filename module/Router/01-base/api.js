@@ -15,9 +15,9 @@ function handleAPIRespone(response, status, data) {
 }
 
 /**
- * 路由表
+ * 接口表
  */
-const relateAPIRoute = {
+const relateAPI = {
   "/api/login": (response) => {
     handleAPIRespone(
       response,
@@ -25,12 +25,10 @@ const relateAPIRoute = {
       JSON.stringify({ code: 200, msg: "登录成功" })
     );
   },
+
   "/api/home": (response) => {
     handleAPIRespone(response, 200, JSON.stringify({ code: 200, msg: "首页" }));
   },
-  "/api/404": (response) => {
-    handleAPIRespone(response, 404, JSON.stringify({ code: 404, msg: "404" }));
-  },
 };
 
-module.exports = relateAPIRoute;
+module.exports = relateAPI;

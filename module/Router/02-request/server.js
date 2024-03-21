@@ -23,9 +23,9 @@ function handleStart() {
     const pathname = myUrl.pathname;
 
     try {
-      allRoute[pathname](response);
+      allRoute[pathname](request, response);
     } catch (error) {
-      allRoute["/404"](response);
+      allRoute["/404"](request, response);
     }
 
     response.end();

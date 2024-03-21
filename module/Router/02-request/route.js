@@ -17,13 +17,15 @@ function handleRespone(response, status, path) {
  * 路由表
  */
 const relateRoute = {
-  "/login": (response) => {
+  "/login": (request, response) => {
     handleRespone(response, 200, "./static/login.html");
   },
-  "/home": (response) => {
+
+  "/home": (request, response) => {
     handleRespone(response, 200, "./static/home.html");
   },
-  "/404": (response) => {
+
+  "/404": (request, response) => {
     handleRespone(response, 404, "./static/404.html");
   },
 };

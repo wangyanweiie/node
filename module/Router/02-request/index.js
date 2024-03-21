@@ -1,8 +1,8 @@
 const serverModule = require("./server");
 const relateRoute = require("./route");
-const relateAPIRoute = require("./api");
+const relateAPI = require("./api");
 
 serverModule.useRoute(relateRoute);
-serverModule.useRoute(relateAPIRoute);
+serverModule.useRoute(relateAPI);
 
 serverModule.handleStart();

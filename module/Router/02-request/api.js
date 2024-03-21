@@ -15,22 +15,66 @@ function handleAPIRespone(response, status, data) {
 }
 
 /**
- * 路由表
+ * 接口表
  */
-const relateAPIRoute = {
-  "/api/login": (response) => {
-    handleAPIRespone(
-      response,
-      200,
-      JSON.stringify({ code: 200, msg: "登录成功" })
-    );
+const relateAPI = {
+  // 登录接口 GET
+  "/api/loginget": (request, response) => {
+    // 获取请求参数
+    const myUrl = new URL(request.url, `http://127.0.0.1`);
+    const params = myUrl.searchParams;
+
+    const username = params.get("username");
+    const password = params.get("password");
+
+    // 根据请求参数进行判断
+    if (username === "admin" && password === "123456") {
+      handleAPIRespone(
+        response,
+        200,
+        JSON.stringify({ code: 200, msg: "登录成功" })
+      );
+    } else {
+      handleAPIRespone(
+        response,
+        300,
+        JSON.stringify({ code: 300, msg: "登录失败" })
+      );
+    }
   },
-  "/api/home": (response) => {
-    handleAPIRespone(response, 200, JSON.stringify({ code: 200, msg: "首页" }));
-  },
-  "/api/404": (response) => {
-    handleAPIRespone(response, 404, JSON.stringify({ code: 404, msg: "404" }));
+
+  // 登录接口 POST
+  "/api/loginpost": (request, response) => {
+    let result = "";
+
+    // 获取请求参数
+    request.on("data", (chunk) => {
+      result += chunk;
+    });
+
+    // 数据接收完毕
+    request.on("end", () => {
+      const data = JSON.parse(result);
+
+      const username = data.username;
+      const password = data.password;
+
+      // 根据请求参数进行判断
+      if (username === "admin" && password === "123456") {
+        handleAPIRespone(
+          response,
+          200,
+          JSON.stringify({ code: 200, msg: "登录成功" })
+        );
+      } else {
+        handleAPIRespone(
+          response,
+          300,
+          JSON.stringify({ code: 300, msg: "登录失败" })
+        );
+      }
+    });
   },
 };
 
-module.exports = relateAPIRoute;
+module.exports = relateAPI;
