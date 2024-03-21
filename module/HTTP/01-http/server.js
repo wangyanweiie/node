@@ -1,7 +1,7 @@
 const http = require("http");
 const url = require("url");
 
-const moduleRender = require("../common/module");
+const renderModule = require("../common/module");
 
 /**
  * 创建服务
@@ -28,12 +28,12 @@ server.on("request", (request, response) => {
   }
 
   // 请求头
-  response.writeHead(moduleRender.renderStatus(pathname), {
+  response.writeHead(renderModule.renderStatus(pathname), {
     "Content-Type": "text/html;charset=utf-8",
   });
 
   // 渲染页面
-  response.write(moduleRender.renderHTML(pathname));
+  response.write(renderModule.renderHTML(pathname));
 
   // 结束
   response.end();
@@ -43,5 +43,5 @@ server.on("request", (request, response) => {
  * 监听端口
  */
 server.listen(3000, () => {
-  console.log("服务器启动成功！");
+  console.log("Server has started");
 });

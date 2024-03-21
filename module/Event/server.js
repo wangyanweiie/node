@@ -1,5 +1,9 @@
 const http = require("http");
+const https = require("https");
 const url = require("url");
+const Emitter = require("events");
+
+let event = null;
 
 /**
  * 创建服务
@@ -24,16 +28,12 @@ server.on("request", (request, response) => {
 
   switch (pathname) {
     case "/api":
-      const content = JSON.stringify({
-        name: "wyw",
-        age: 26,
-        address: "南京",
-        phone: "110",
-        email: "wyw@163.com",
-        time: new Date(),
-      });
+      handleHttps();
 
-      response.end(`${content}`);
+      event = new Emitter();
+      event.on("receiveEnd", (res) => {
+        response.end(res);
+      });
       break;
 
     default:
@@ -45,5 +45,27 @@ server.on("request", (request, response) => {
  * 监听端口
  */
 server.listen(3000, () => {
-  console.log("服务器启动成功！");
+  console.log("Server has started");
 });
+
+/**
+ * 请求数据
+ */
+function handleHttps() {
+  let result = "";
+
+  https.get(
+    "https://i.maoyan.com/api/mmdb/movie/v3/list/hot.json?ct=%E5%8D%97%E4%BA%AC&ci=55&channelId=4",
+    (res) => {
+      // 数据接收
+      res.on("data", (chunk) => {
+        result += chunk;
+      });
+
+      // 数据接收完毕
+      res.on("end", () => {
+        event.emit("receiveEnd", result);
+      });
+    }
+  );
+}

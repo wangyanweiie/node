@@ -27,5 +27,5 @@ server.on("request", (request, response) => {
  * 监听端口
  */
 server.listen(3000, () => {
-  console.log("服务器启动成功！");
+  console.log("Server has started");
 });

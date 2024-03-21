@@ -1,6 +1,7 @@
 const http = require("http");
 const https = require("https");
 const url = require("url");
+const cheerio = require("cheerio");
 
 /**
  * 创建服务
@@ -25,9 +26,9 @@ server.on("request", (request, response) => {
 
   switch (pathname) {
     case "/api":
-      // 作为客户端向小米有品平台发送数据
+      // 作为客户端向猫眼平台请求数据
       handleHttps((data) => {
-        response.end(data);
+        response.end(handleSpider(data));
       });
       break;
 
@@ -40,27 +41,19 @@ server.on("request", (request, response) => {
  * 监听端口
  */
 server.listen(3000, () => {
-  console.log("服务器启动成功！");
+  console.log("Server has started");
 });
 
 /**
  * 请求数据
+ * @params response 响应对象
  * @params callback 回调函数 - 异步编程思想
  */
 function handleHttps(callback) {
   let result = "";
 
-  const options = {
-    hostname: "m.xiaomiyoupin.com",
-    port: 443,
-    path: "/mtop/market/search/placeHolder",
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json;charset=utf-8",
-    },
-  };
-
-  const request = https.request(options, (res) => {
+  // 访问多次会报 302 IP 限制
+  https.get("https://i.maoyan.com/", (res) => {
     // 数据接收
     res.on("data", (chunk) => {
       result += chunk;
@@ -68,12 +61,29 @@ function handleHttps(callback) {
 
     // 数据接收完毕
     res.on("end", () => {
+      console.log(result);
       callback(result);
     });
   });
+}
 
-  const data = [{}, { baseParam: { ypClient: 1 } }];
+/**
+ * 处理数据
+ * @param data 请求数据
+ */
+function handleSpider(data) {
+  const $ = cheerio.load(data);
 
-  request.write(JSON.stringify(data));
-  request.end();
+  const $movieList = $(".column.content");
+  const movieList = [];
+
+  $movieList.each((index, value) => {
+    movieList.push({
+      title: $(value).find(".title").text(),
+      grade: $(value).find(".grade").text(),
+      actor: $(value).find(".actor").text(),
+    });
+  });
+
+  return JSON.stringify(movieList);
 }
