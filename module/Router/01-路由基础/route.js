@@ -23,7 +23,7 @@ const relateRoute = {
     handleRespone(response, 200, "./static/login.html");
   },
 
-  "/home": (response) => {
+  "/": (response) => {
     handleRespone(response, 200, "./static/home.html");
   },
 

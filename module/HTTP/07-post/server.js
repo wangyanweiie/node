@@ -4,7 +4,6 @@ const url = require("url");
 
 /**
  * 创建服务
- * npm install -g nodemon => 当代码改变时自动重启服务
  */
 const server = http.createServer();
 
