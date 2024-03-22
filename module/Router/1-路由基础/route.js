@@ -7,7 +7,10 @@ const fs = require("fs");
  * @param {string} path 文件路径
  */
 function handleRespone(response, status, path) {
-  response.writeHead(status, { "Content-Type": "text/html;charset=utf-8" });
+  response.writeHead(status, {
+    // 设置响应头：text/html 代码片段
+    "Content-Type": "text/html;charset=utf-8",
+  });
 
   const content = fs.readFileSync(path, "utf-8");
 
@@ -19,15 +22,15 @@ function handleRespone(response, status, path) {
  * 路由表
  */
 const relateRoute = {
-  "/login": (request, response) => {
+  "/login": (response) => {
     handleRespone(response, 200, "./static/login.html");
   },
 
-  "/": (request, response) => {
+  "/": (response) => {
     handleRespone(response, 200, "./static/home.html");
   },
 
-  "/404": (request, response) => {
+  "/404": (response) => {
     handleRespone(response, 404, "./static/404.html");
   },
 };

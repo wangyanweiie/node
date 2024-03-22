@@ -6,6 +6,7 @@
  */
 function handleAPIRespone(response, status, data) {
   response.writeHead(status, {
+    // 设置响应头：application/json
     "Content-Type": "application/json;charset=utf-8",
   });
 

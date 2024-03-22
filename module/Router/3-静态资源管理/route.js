@@ -29,6 +29,7 @@ function judgeFileIsExist(path) {
  */
 function handleRespone(response, status, path, type) {
   response.writeHead(status, {
+    // 设置响应头：text/html 代码片段
     "Content-Type": `${type ? type : "text/html"};charset=utf-8`,
   });
 
