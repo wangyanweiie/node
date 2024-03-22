@@ -30,7 +30,7 @@ app.get("/login", (request, response) => {
 /**
  * 中间件
  */
-function callback1(request, response, next) {
+function callback(request, response, next) {
   console.log("验证 Token 逻辑");
 
   // 使用 next() 放行会执行下一个回调函数
@@ -39,10 +39,10 @@ function callback1(request, response, next) {
 
 /**
  * 注册应用级中间件 => 挂载在 app 上
- * 要注意注册中间件的位置，注册中间件之后，所有请求都会经过这个中间件
+ * TODO: 要注意注册中间件的位置，注册中间件之后，所有请求都会经过这个中间件
  */
-// app.use(callback1);
-app.use("/home", callback1);
+// app.use(callback);
+app.use("/home", callback);
 
 app.get("/home", (request, response) => {
   response.send({
@@ -50,6 +50,7 @@ app.get("/home", (request, response) => {
     msg: "首页",
   });
 });
+
 /**
  * 监听端口
  */
