@@ -27,8 +27,6 @@ function handleStart() {
     } catch (error) {
       allRoute["/404"](request, response);
     }
-
-    response.end();
   });
 
   // 监听端口

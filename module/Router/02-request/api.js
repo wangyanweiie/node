@@ -1,5 +1,3 @@
-const fs = require("fs");
-
 /**
  * 响应处理
  * @param {*} response 响应对象
@@ -12,6 +10,7 @@ function handleAPIRespone(response, status, data) {
   });
 
   response.write(data);
+  response.end();
 }
 
 /**
@@ -23,7 +22,6 @@ const relateAPI = {
     // 获取请求参数
     const myUrl = new URL(request.url, `http://127.0.0.1`);
     const params = myUrl.searchParams;
-
     const username = params.get("username");
     const password = params.get("password");
 
@@ -32,13 +30,13 @@ const relateAPI = {
       handleAPIRespone(
         response,
         200,
-        JSON.stringify({ code: 200, msg: "登录成功" })
+        JSON.stringify({ code: 200, msg: "登录成功 GET" })
       );
     } else {
       handleAPIRespone(
         response,
         300,
-        JSON.stringify({ code: 300, msg: "登录失败" })
+        JSON.stringify({ code: 300, msg: "登录失败 GET" })
       );
     }
   },
@@ -55,7 +53,6 @@ const relateAPI = {
     // 数据接收完毕
     request.on("end", () => {
       const data = JSON.parse(result);
-
       const username = data.username;
       const password = data.password;
 
@@ -64,13 +61,13 @@ const relateAPI = {
         handleAPIRespone(
           response,
           200,
-          JSON.stringify({ code: 200, msg: "登录成功" })
+          JSON.stringify({ code: 200, msg: "登录成功 POST" })
         );
       } else {
         handleAPIRespone(
           response,
           300,
-          JSON.stringify({ code: 300, msg: "登录失败" })
+          JSON.stringify({ code: 300, msg: "登录失败 POST" })
         );
       }
     });

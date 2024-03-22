@@ -10,7 +10,9 @@ function handleRespone(response, status, path) {
   response.writeHead(status, { "Content-Type": "text/html;charset=utf-8" });
 
   const content = fs.readFileSync(path, "utf-8");
+
   response.write(content);
+  response.end();
 }
 
 /**

@@ -1,5 +1,3 @@
-const fs = require("fs");
-
 /**
  * 响应处理
  * @param {*} response 响应对象
@@ -12,6 +10,7 @@ function handleAPIRespone(response, status, data) {
   });
 
   response.write(data);
+  response.end();
 }
 
 /**

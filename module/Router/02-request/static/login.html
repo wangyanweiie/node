@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>登录页</title>
 </head>
 <body>
   <div>
@@ -23,7 +23,7 @@
     /**
      * 登录 GET
      */
-    const loginget = async () => {
+    const loginget = () => {
       const username = document.getElementById('username').value;
       const password = document.getElementById('password').value;
 
@@ -35,7 +35,7 @@
     // 请求后端接口
     fetch(`/api/loginget?username=${username}&password=${password}`)
       // 请求头 & readStream 流
-      .then(response => response.json()) 
+      .then(response => response.text()) 
       // 真实数据
       .then(data => console.log(data))
       .catch(error => console.error(error))
@@ -44,7 +44,7 @@
     /**
      * 登录 POST
      */
-    const loginpost = async () => {
+    const loginpost = () => {
       const username = document.getElementById('username').value;
       const password = document.getElementById('password').value;
 
