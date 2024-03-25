@@ -7,6 +7,16 @@ const app = express();
 
 /**
  * 注册内置中间件
+ * 配置静态资源文件夹
+ *  - http://localhost:3000/login.html
+ *    http://localhost:3000/home.html
+ *  - http://localhost:3000/static/404.html
+ */
+app.use(express.static("public"));
+app.use("/static", express.static("static"));
+
+/**
+ * 注册内置中间件
  * 解析 post 请求中的参数
  * - urlencoded => 可解析 post 参数，username=wyw&password=123456
  * - json => 可解析 post 参数，{ username:"wyw", password:123456 }

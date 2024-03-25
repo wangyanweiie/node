@@ -16,7 +16,7 @@ function logingetCallback(request, response) {
 }
 
 function loginpostCallback(request, response) {
-  // 获取请求参数，必须要使用 body-parser 中间件
+  // 获取请求参数，必须要使用内置中间件
   const body = request.body;
 
   response.send({
