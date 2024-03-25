@@ -45,9 +45,9 @@ function loginpostCallback(request, response) {
  * 注册路由级中间件
  */
 // 响应前端的 GET 请求
-router.get("/get", logingetCallback);
+router.get("/", logingetCallback);
 
 // 响应前端的 POST 请求
-router.post("/post", loginpostCallback);
+router.post("/", loginpostCallback);
 
 module.exports = router;

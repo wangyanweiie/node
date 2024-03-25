@@ -1,0 +1,15 @@
+{
+  "name": "request",
+  "version": "1.0.0",
+  "description": "获取请求参数",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "wyw",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.19.1"
+  }
+}

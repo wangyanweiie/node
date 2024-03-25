@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ejs 模板引擎</title>
+</head>
+<body>
+  <h4>
+    <!-- <%= %> 模板引擎语法 -->
+    当前状态：<%= tip %>
+  </h4>
+
+  <div>
+    <form action="/login" method="POST">
+      <div>
+        <span>用户名：</span>
+        <input type="text" name="username">
+      </div>
+      <div>
+        <span>密码：</span>
+        <input type="password" name="password">
+      </div>
+      <div>
+        <input type="submit" value="登录">
+      </div>
+    </form>
+  </div>
+</body>
+</html>
