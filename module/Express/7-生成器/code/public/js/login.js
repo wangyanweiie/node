@@ -17,11 +17,12 @@ const loginget = () => {
     // 真实数据
     .then((data) => {
       // 跳转到首页
-      if (JSON.parse(data).code === 200) {
-        location.href = "/home.html";
-      } else {
-        alert(JSON.parse(data).msg);
-      }
+      // if (JSON.parse(data).code === 200) {
+      //   location.href = "/home.html";
+      // } else {
+      //   alert(JSON.parse(data).msg);
+      // }
+      location.href = "/home";
     })
     .catch((error) => console.error(error));
 };
@@ -54,11 +55,12 @@ const loginpost = () => {
     // 真实数据
     .then((data) => {
       // 跳转到首页
-      if (JSON.parse(data).code === 200) {
-        location.href = "/home.html";
-      } else {
-        alert(JSON.parse(data).msg);
-      }
+      // if (JSON.parse(data).code === 200) {
+      //   location.href = "/home.html";
+      // } else {
+      //   alert(JSON.parse(data).msg);
+      // }
+      location.href = "/home";
     })
     .catch((error) => console.error(error));
 };

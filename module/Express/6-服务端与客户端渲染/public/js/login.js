@@ -11,7 +11,7 @@ const loginget = () => {
   }
 
   // 请求后端接口
-  fetch(`/login/get?username=${username}&password=${password}`)
+  fetch(`/login?username=${username}&password=${password}`)
     // 请求头 & readStream 流
     .then((response) => response.text())
     // 真实数据
@@ -39,7 +39,7 @@ const loginpost = () => {
   }
 
   // 请求后端接口
-  fetch(`/login/post`, {
+  fetch(`/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

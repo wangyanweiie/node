@@ -6,9 +6,25 @@
   <title>ejs 模板引擎</title>
 </head>
 <body>
-    <div>
-      <!-- <%= %> 模板引擎语法 -->
-      <%= list %>
-    </div>
+  <!-- 导入公共的模版内容 -->
+  <%- include("./header.ejs", { show: true })  %>
+
+  <ul>
+    <!-- 
+      <% %> 支持流程控制语法（if else for）
+      <%= %> 输出标签（原文输出 HTML 标签） 
+      <%- %> 输出标签（HTML 会被浏览器解析） 
+      <%# %> 注释标签（不会渲染在 dom 中）
+      include("", {})
+    -->
+    <% for(let i = 0; i < list.length; i++) { %>
+      <!-- <%=  %> 变量 -->
+      <li><%= list[i] %></li>
+    <% } %>
+
+    <div>=：<%= template %></div>
+    <div>-：<%- template %></div>
+    <div>#：<%# 我是注释 %></div>
+  </ul>
 </body>
 </html>
