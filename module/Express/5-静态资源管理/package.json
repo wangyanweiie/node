@@ -1,5 +1,5 @@
 {
-  "name": "request",
+  "name": "public",
   "version": "1.0.0",
   "description": "获取请求参数",
   "main": "index.js",
