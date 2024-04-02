@@ -50,15 +50,16 @@
       var update = document.querySelector("#update")
       var deletebutton = document.querySelector("#delete")
 
+      // 注册用户
       register.onclick = () => {
-        fetch("/api/user/add",{
-          method:"POST",
-          body:JSON.stringify({
+        fetch("/api/user",{
+          method: "POST",
+          body: JSON.stringify({
             username: username.value,
             password: password.value,
             age: age.value
           }),
-          headers:{
+          headers: {
             "Content-Type":"application/json"
           }
         }).then(res => res.json()).then(res => {
@@ -66,15 +67,16 @@
         })
       }
 
+      // 更新用户
       update.onclick = () => {
-        fetch("/api/user/update/660aab3ff59743ddf981367f",{
-          method:"POST",
-          body:JSON.stringify({
+        fetch("/api/user/660aadd3af3411d2bb83e7f1",{
+          method: "PUT",
+          body: JSON.stringify({
             username: "wyw",
             password: "15150193696",
-            age: 100 
+            age: 10 
           }),
-          headers:{
+          headers: {
             "Content-Type":"application/json"
           }
         }).then(res => res.json()).then(res => {
@@ -82,13 +84,17 @@
         })
       }
 
+      // 删除用户
       deletebutton.onclick = () => {
-        fetch("/api/user/delete/660aab3ff59743ddf981367f").then(res => res.json()).then(res => {
+        fetch("/api/user/660aadd3af3411d2bb83e7f1", {
+          method: "DELETE"
+        }).then(res => res.json()).then(res => {
           console.log(res)
         })
       }
 
-      fetch("/api/user/list?page=1&limit=10").then(res => res.json()).then(res => {
+      // 查询用户
+      fetch("/api/user?page=1&limit=10").then(res => res.json()).then(res => {
         console.log(res)
         var tbody = document.querySelector("tbody")
         tbody.innerHTML = res.map(item=>`

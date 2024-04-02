@@ -7,7 +7,11 @@ router.get("/", function (req, res, next) {
   res.send("respond with a resource");
 });
 
-router.post("/user/add", (req, res) => {
+/**
+ * 响应前端 POST 请求
+ * 注册用户
+ */
+router.post("/user", (req, res) => {
   /**
    * 插入数据库
    * 1. 创建一个模型 (user, 限制 filed 类型), 一一对应数据库的集合 (users)
@@ -21,19 +25,21 @@ router.post("/user/add", (req, res) => {
   }).then((data) => {
     res.send({
       status: 200,
+      message: "注册成功",
     });
   });
 });
 
 /**
- * 动态路由
+ * 响应前端 PUT 请求
+ * 更新用户信息
  */
-router.post("/user/update/:myid", (req, res) => {
+router.put("/user/:userId", (req, res) => {
   const { username, password, age } = req.body;
 
   UserModel.updateOne(
     {
-      _id: req.params.myid,
+      _id: req.params.userId,
     },
     {
       username,
@@ -43,21 +49,31 @@ router.post("/user/update/:myid", (req, res) => {
   ).then((data) => {
     res.send({
       status: 200,
+      message: "更新成功",
     });
   });
 });
 
-router.get("/user/delete/:id", (req, res) => {
+/**
+ * 响应前端 DELETE 请求
+ * 删除用户
+ */
+router.delete("/user/:id", (req, res) => {
   UserModel.deleteOne({
     _id: req.params.id,
   }).then((data) => {
     res.send({
       status: 200,
+      message: "删除成功",
     });
   });
 });
 
-router.get("/user/list", (req, res) => {
+/**
+ * 响应前端 GET 请求
+ * 查询用户
+ */
+router.get("/user", (req, res) => {
   const { page, limit } = req.query;
 
   UserModel.find({}, ["username", "age"])
