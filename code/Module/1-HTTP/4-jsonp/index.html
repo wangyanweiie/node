@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>JsonP</title>
 </head>
+
 <body>
   <!-- jsonp 接口调用 -->
   <script>
@@ -16,19 +18,20 @@
      * 3. 通过 document.body.removeChild(script) 来移除 script 标签
      */
     function getJSONP(url, callback) {
+      console.log(url, callback);
+
       var script = document.createElement('script');
       script.src = url;
       document.body.appendChild(script);
 
-      if(callback) {
-        window[callback] = function(data) {
+      if (callback) {
+        window[callback] = function (data) {
           document.body.removeChild(script);
           callback(data);
         }
       }
-      
     }
-    
+
     getJSONP('http://localhost:3000/api?callback=wyw');
 
     /**
@@ -39,4 +42,5 @@
     }
   </script>
 </body>
+
 </html>

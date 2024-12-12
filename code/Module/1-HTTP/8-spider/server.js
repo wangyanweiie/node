@@ -27,7 +27,8 @@ server.on("request", (request, response) => {
     case "/api":
       // 作为客户端向猫眼平台请求数据
       handleHttps((data) => {
-        response.end(handleSpider(data));
+        const handleData = handleSpider(data);
+        response.end(handleData);
       });
       break;
 
@@ -73,6 +74,7 @@ function handleHttps(callback) {
 function handleSpider(data) {
   const $ = cheerio.load(data);
 
+  // class="column content"
   const $movieList = $(".column.content");
   const movieList = [];
 

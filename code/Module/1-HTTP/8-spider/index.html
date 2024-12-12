@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>小米有品</title>
+  <title>爬虫</title>
 </head>
+
 <body>
   <script>
     /**
@@ -12,10 +14,11 @@
      */
     fetch('http://localhost:3000/api')
       // 请求头 & readStream 流
-      .then(response => response.json()) 
+      .then(response => response.json())
       // 真实数据
       .then(data => console.log(data))
       .catch(error => console.error(error))
   </script>
 </body>
+
 </html>
